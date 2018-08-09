@@ -1,0 +1,27 @@
+{
+   "name": "anistats",
+   "version": "1.0.3",
+   "description": "Трекинг просмотренных аниме.",
+   "main": "app.js",
+   "scripts": {
+      "dev": "nodemon app.js ",
+      "build": ""
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/holykol/AniStats.git"
+   },
+   "author": "Timofey Barinov",
+   "license": "MIT",
+   "bugs": {
+      "url": "https://github.com/holykol/AniStats/issues"
+   }, 
+   "homepage": "https://github.com/holykol/AniStats#readme",
+   "dependencies": {
+      "body-parser": "^1.17.1",
+      "express": "^4.15.2",
+      "lodash-id": "^0.14.0",
+      "lowdb": "^0.16.2",
+      "pug": "^2.0.0-beta11"
+   }     
+}  
