@@ -1,6 +1,6 @@
 <template>
    <div>
-      <table class="table table-hover" v-if="$store.state.data.length">
+      <table class="table table-hover mb-0" v-if="$store.state.data.length">
          <thead>
             <tr>
                <th>Название</th>
@@ -26,7 +26,7 @@
             </tr>
          </tbody>
       </table>
-      <div class="card-body text-muted" v-else>Тут ёще ничего нет...</div>
+      <div class="card-body text-muted" v-else>Тут пока ничего нет...</div>
       <b-modal id="editModal" ref="editModal" title="Изменить">
          <form action="" ref="form">
             <div class="form-group">

@@ -38,7 +38,7 @@
 			submit(e) {
 				e.preventDefault()
 
-				if (!this.title || this.episodes === 0) {
+				if (!this.title || this.episodes < 1) {
 					this.error = "Заполни все поля!"
 					setTimeout(() => {
 						this.error = null

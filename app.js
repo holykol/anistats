@@ -34,7 +34,7 @@ app.post('/' , function(req, res) {
 	var id = db.get('watched').insert({
 		title: 		req.body.title || "No title",
 		url:  		req.body.url || "",
-		episodes: 	Number(req.body.episodes || 1) 
+		episodes: 	Number(req.body.episodes) || 1 
 	}).write().id
 
 	res.json({
@@ -49,6 +49,11 @@ app.get('/', function(req, res) {
 	res.json(db.get('watched').value())
 })
 
+/* === GET === */
+app.get('/id/:id', function(req, res) {
+	res.json(db.getById(req.params.id).value())
+})
+
 
 
 /* === PUT === */
@@ -58,8 +63,7 @@ app.put('/:id', function(req, res) {
 	}
 	
 	db.get('watched')
-		.find({id: req.params.id})
-		.assign(req.body)
+		.updateById(req.params.id, req.body)
   		.write()
 
   	res.json({success: true})
@@ -68,7 +72,7 @@ app.put('/:id', function(req, res) {
 /* === DELETE === */
 app.delete('/:id', function(req, res) {
 	db.get('watched')
-		.remove({id: req.params.id})
+		.removeById(req.params.id)
   		.write()
 
   	res.json({success: true})
