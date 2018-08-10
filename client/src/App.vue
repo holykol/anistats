@@ -5,7 +5,7 @@
 
   			<b-nav-item-dropdown v-if="$store.getters.isLogged" right>
   				<span slot="button-content">
-					<img class="nav-text" :src="avatarUrl" id="avatar" alt="avatar" v-if="$store.getters.isLogged"/>
+					<img :src="avatarUrl" class="avatar mr-1" alt="avatar"/>
   					<span>{{$store.state.account.user.username}}</span>
   				</span>
 				<b-dropdown-item @click="logout">Выйти</b-dropdown-item>
@@ -49,7 +49,7 @@
 			avatarUrl() {
 				if (this.$store.getters.isLogged) {
 					const hash = md5(this.$store.state.account.user.username)
-					return `https://www.gravatar.com/avatar/${hash}?s=50?d=retro`
+					return `https://www.gravatar.com/avatar/${hash}?s=50&d=retro`
 				}
 				return null
 			}
@@ -60,7 +60,7 @@
 </script>
 
 <style>
-	#avatar {
+	.avatar {
 		width: 30px;
 		height: 30px;
 		border-radius: 50%;
@@ -68,10 +68,5 @@
 
 	.dropdown {
 		list-style: none;
-		padding-left: 0;
-	}
-	.dropdown .nav-link {
-		list-style: none;
-		padding-left: 5px;
 	}
 </style>
