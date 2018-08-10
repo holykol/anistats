@@ -1,7 +1,7 @@
 <template>
 	<div class="wrap">
 		<form action="" class="form" @submit="submit">
-			<h3 class="pb-3">Вход / <router-link to="/register">Регистрация</router-link></h3>
+			<h3 class="pb-3"><router-link to="/login">Вход</router-link> / Регистрация</h3>
 			<div class="form-group">
 				<input type="email" v-model="username" class="form-control" placeholder="Email">
 			</div>
@@ -9,7 +9,7 @@
 				<input type="password" v-model="password" class="form-control" placeholder="Пароль">
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary w-100">Войти</button>
+				<button type="submit" class="btn btn-primary w-100">Зарегистрироваться</button>
 				<p class="text-danger error pt-2" v-if="error">{{error}}</p>
 			</div>
 			<div class="form-group">
@@ -20,10 +20,10 @@
 </template>
 
 <script>
-	import { login } from '../actions/account'
+	import { register } from '../actions/account'
 
 	export default {
-		name: "Login",
+		name: "Register",
 		data() {
 			return {
 				username: null,
@@ -35,7 +35,8 @@
 			async submit(e) {
 				e.preventDefault()
 				try {
-					const res = await login(this.username, this.password)
+					const res = await register(this.username, this.password)
+					
 					this.$store.commit('login', res.data)
 					this.error = null
 					this.$router.push('/')

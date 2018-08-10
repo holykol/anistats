@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import axios from 'axios'
 
+import account from './account'
 
 Vue.use(Vuex)
 
@@ -70,6 +71,9 @@ var store = new Vuex.Store({
 		reversedItems(state) {
 			return state.data
 		}
+	},
+	modules: {
+		account
 	}
 })
 

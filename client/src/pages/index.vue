@@ -44,15 +44,15 @@
     		'Stats': Stats,
     		'List': List,
 		},
-		created() {
-			axios.get('http://localhost:8081')
-				.then((res) => {
-					this.$store.commit('init', res.data.reverse())
-				})
-				.catch((err) => {
-					console.error(err)
-				})
-		}
+		// created() {
+		// 	axios.get('http://localhost:8081')
+		// 		.then((res) => {
+		// 			this.$store.commit('init', res.data.reverse())
+		// 		})
+		// 		.catch((err) => {
+		// 			console.error(err)
+		// 		})
+		// }
 	}
 	
 	

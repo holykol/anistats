@@ -1,7 +1,22 @@
 <template>
 	<div id="app">
 		<nav class="navbar navbar-light bg-light">
-  			<a class="navbar-brand" href="#"><b>AniStats</b></a>
+  			<router-link class="navbar-brand mr-auto" to="/"><b>AniStats</b></router-link>
+
+  			<b-nav-item-dropdown v-if="$store.getters.isLogged" right>
+  				<span slot="button-content">
+					<img class="nav-text" :src="avatarUrl" id="avatar" alt="avatar" v-if="$store.getters.isLogged"/>
+  					<span>{{$store.state.account.user.username}}</span>
+  				</span>
+				<b-dropdown-item @click="logout">Выйти</b-dropdown-item>
+        	</b-nav-item-dropdown>
+  
+  			
+  			<!-- <div v-if="$store.getters.isLogged">
+  				<img :src="avatarUrl" id="avatar" alt="avatar"/>
+  				<span class="navbar-text" v></span>
+  			</div>
+  			 -->
 		</nav>
 		<div class="container">
 			<router-view></router-view>
@@ -12,32 +27,51 @@
 <script>
 	import axios from 'axios'
 	import 'bootstrap/dist/css/bootstrap.css'
-	
-	import Add from './components/Add.vue'
-	import Stats from './components/Stats.vue'
-	import List from './components/List.vue'
-
+	import md5 from 'md5'
 	export default {
 		name: "App",
-		components: {
-    		'Add': Add,
-    		'Stats': Stats,
-    		'List': List,
-		},
 		created() {
-			axios.get('http://localhost:8081')
-				.then((res) => {
-					this.$store.commit('init', res.data.reverse())
-				})
-				.catch((err) => {
-					console.error(err)
-				})
+			// axios.get('http://localhost:8081')
+			// 	.then((res) => {
+			// 		this.$store.commit('init', res.data.reverse())
+			// 	})
+			// 	.catch((err) => {
+			// 		console.error(err)
+			// 	})
+		},
+		methods: {
+			logout() {
+				this.$router.push('/login')
+				this.$store.dispatch('logout')
+			}
+		},
+		computed: {
+			avatarUrl() {
+				if (this.$store.getters.isLogged) {
+					const hash = md5(this.$store.state.account.user.username)
+					return `https://www.gravatar.com/avatar/${hash}?s=50?d=retro`
+				}
+				return null
+			}
 		}
 	}
 	
 	
 </script>
 
-<style type="text/css">
-	
+<style>
+	#avatar {
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+	}
+
+	.dropdown {
+		list-style: none;
+		padding-left: 0;
+	}
+	.dropdown .nav-link {
+		list-style: none;
+		padding-left: 5px;
+	}
 </style>
