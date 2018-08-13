@@ -87,5 +87,6 @@ $RECYCLE.BIN/
 #Custom
 db.json
 TODO\.md
+dist
 .env
 public/css/bootstrap\.css

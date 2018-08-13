@@ -15,6 +15,9 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
 
+console.log(process.env.NODE_ENV)
+console.log(process.env.SIMPERIUM_APP_ID)
+console.log(process.env.SIMPERIUM_API_KEY)
 
 try {
 	if (store.getters.isAuthorized) {

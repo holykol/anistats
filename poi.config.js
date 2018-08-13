@@ -2,7 +2,7 @@ const path = require('path')
 const pkg = require('./package')
 const webpack = require('webpack')
 
-require('dotenv').config({path: '../.env'})
+require('dotenv').config()
 
 module.exports = {
    entry: [

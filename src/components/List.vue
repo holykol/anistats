@@ -1,5 +1,5 @@
 <template>
-   <div>
+   <div class="table-responsive">
       <table class="table table-hover mb-0" v-if="titlesCount">
          <thead>
             <tr>
@@ -14,7 +14,7 @@
                <td v-else>{{item.title}}</td>
    
                <td>{{ item.episodes }}</td>
-               <td>
+               <td style="white-space: nowrap">
                   <a href="#" @click="showEditModal" :data-id="id">
                      <span class="icon icon-edit"></span> Изменить
                   </a>
