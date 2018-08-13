@@ -1,6 +1,6 @@
 <template>
    <div>
-      <table class="table table-hover mb-0" v-if="true">
+      <table class="table table-hover mb-0" v-if="titlesCount">
          <thead>
             <tr>
                <th>Название</th>
@@ -64,6 +64,7 @@
 </template>
 <script>
    import smpr from '../simperium/simperium'
+   import { mapGetters } from 'vuex'
 
    export default {
       name: "Stats",
@@ -79,9 +80,7 @@
          }
       },
       computed: {
-         data() {
-            return this.$store.getters.reversedItems
-         },
+         ...mapGetters(['titlesCount'])
       },
       methods: {
          deleteItem(e) {
@@ -125,6 +124,15 @@
          url('../../static/fonts/icon.svg?b36xa6#icon') format('svg');
       font-weight: normal;
       font-style: normal;
+   }
+
+   .table th {
+      padding: 0.6rem 1.25rem;
+      border-bottom: none;
+   }
+
+   .table td {
+      padding: 0.4rem 1.25rem;   
    }
 
    .icon {

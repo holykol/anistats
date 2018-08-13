@@ -22,8 +22,10 @@ class Smpr {
 	}
 
 	deauthorize() {
-		this.client.setAccessToken(null)
 		this.client.disconnect()
+		// Prevent errors
+		this.client.onClose()
+		this.client.setAccessToken(null)
 	}
 
 	add(data) {
