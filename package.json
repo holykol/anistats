@@ -8,7 +8,9 @@
     "dev": "poi",
     "build": "poi build",
     "report": "poi build --bundle-report",
-    "start": "serve dist --single"
+    "start": "serve dist --single",
+    "lint": "eslint . --ignore-path .gitignore",
+    "lintfix": "eslint ./src --fix --ignore-path .gitignore"
   },
   "babel": {
     "presets": [
@@ -36,6 +38,13 @@
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
+    "eslint": "^5.3.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "eslint-plugin-vue": "^5.0.0-beta.2",
     "poi": "^9.0.0",
     "poi-preset-bundle-report": "^2.0.0",
     "poi-preset-offline": "^9.0.0",

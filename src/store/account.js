@@ -1,10 +1,10 @@
 const state = {
-   user: null
+   user: null,
 }
 
 // getters
 const getters = {
-   isAuthorized(state) {
+   isAuthorized (state) {
       if (state.user === null) {
          return false
       }
@@ -14,16 +14,16 @@ const getters = {
 
 // mutations
 const mutations = {
-   login(state, user) {
+   login (state, user) {
       state.user = user
    },
-   logout(state) {
+   logout (state) {
       state.user = null
    },
 }
 
 const actions = {
-   logout(store) {
+   logout (store) {
       store.commit('logout')
    },
 }
