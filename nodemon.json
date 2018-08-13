@@ -1,8 +1,8 @@
 {   
-    "ignore": [
-    	"public/",
-    	"views/",
-    	"src/",
-    	"db.json"
-    ] 
+	"ignore": [
+		"public/",
+		"views/",
+		"src/",
+		"db.json"
+	] 
 }

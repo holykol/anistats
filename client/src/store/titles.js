@@ -30,6 +30,7 @@ const actions = {
 	}
 }
 
+
 const getters = {
 	episodesCount(state) {
 		let count = 0
@@ -41,6 +42,22 @@ const getters = {
    titlesCount(state) {
       const keys = Object.keys(state.data)
       return keys.length
+   },
+
+   sortedItems(state) {
+		const sorted = Object.keys(state.data).sort((id1, id2) => {
+			const a = state.data[id1].createdAt 
+			const b = state.data[id2].createdAt
+
+			return a > b ? -1 : a < b ? 1 : 0
+		})
+
+		const result = {} 
+		sorted.forEach((el) => {
+			result[el] = state.data[el]
+		})
+
+		return result
    }
 }
 

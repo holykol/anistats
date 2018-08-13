@@ -9,7 +9,7 @@ const bodyParser = require("body-parser")
 
 require('dotenv').config()
 
-// Уберем самопиар
+
 app.disable('x-powered-by')
 
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -24,17 +24,6 @@ app.use(function(req, res, next) {
 	next()
 })
 
-
-
-
-// Настраиваем БД
-const db = low('db.json')
-db._.mixin(require('lodash-id'))
-
-
-// Настройки по-умолчанию
-db.defaults({watched: []}).write()
-
 /* === AUTH === */
 const middlewares = [
 	// username must be an email
@@ -42,7 +31,6 @@ const middlewares = [
 	// password must be at least 1 chars long
 	check('password').isLength({ min: 1 })
 ]
-
 
 
 
@@ -72,6 +60,7 @@ app.post('/auth/register', middlewares, async function(req, res) {
 	}
 })
 
+
 app.post('/auth/login', middlewares, async function(req, res) {
 	try {
 			const errors = validationResult(req);
@@ -97,64 +86,6 @@ app.post('/auth/login', middlewares, async function(req, res) {
 
 			res.json({error: e.message})
 		}
-})
-
-
-// app.get('/auth/update_password', function(req, res) {
-// 	res.json(db.get('watched').value())
-// })
-
-
-
-
-
-/* === POST === */
-app.post('/' , function(req, res) {
-	const id = db.get('watched').insert({
-		title: 		req.body.title || "No title",
-		url:  		req.body.url || "",
-		episodes: 	Number(req.body.episodes) || 1 
-	}).write().id
-
-	res.json({
-		success: true, 
-		id: id
-	})
-})
-
-
-/* === GET === */
-app.get('/', function(req, res) {
-	res.json(db.get('watched').value())
-})
-
-app.get('/id/:id', function(req, res) {
-	res.json(db.getById(req.params.id).value())
-})
-
-
-
-
-/* === PUT === */
-app.put('/:id', function(req, res) {
-	if (req.body.episodes) {
-		req.body.episodes = Number(req.body.episodes)
-	}
-	
-	db.get('watched')
-		.updateById(req.params.id, req.body)
-  		.write()
-
-  	res.json({success: true})
-})
-
-/* === DELETE === */
-app.delete('/:id', function(req, res) {
-	db.get('watched')
-		.removeById(req.params.id)
-  		.write()
-
-  	res.json({success: true})
 })
 
 

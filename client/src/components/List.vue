@@ -9,7 +9,7 @@
             </tr>
          </thead>
          <tbody>
-            <tr v-for="(item, id) in $store.state.titles.data">
+            <tr v-for="(item, id) in $store.getters.sortedItems">
                <td v-if="item.url"><a :href="item.url" target="_blank">{{item.title}}</a></td>
                <td v-else>{{item.title}}</td>
    
@@ -75,6 +75,8 @@
                title: null,
                url: null,
                episodes: 0,
+               createdAt: null,
+               updatedAt: null,
             },
             deletingId: null,
          }
@@ -108,6 +110,7 @@
          },
          saveItem(e) {
             e.preventDefault()
+            this.editing.updatedAt = Date.now()
             smpr.update(this.editing.id, this.editing)
          }
       }

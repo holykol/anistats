@@ -8,7 +8,6 @@ const getters = {
       if (state.user === null) {
          return false
       }
-      // if (state.user.user) {}
       return true
    },
 }

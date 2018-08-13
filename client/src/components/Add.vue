@@ -34,6 +34,8 @@
 				url: null,
 				episodes: null,
 				error: null,
+				createdAt: null,
+				updatedAt: null,
 			}
 		},
 		methods: {
@@ -53,6 +55,8 @@
 						title: this.title,
 						url: this.url,
 						episodes: this.episodes,
+						createdAt: Date.now(),
+						updatedAt: Date.now(),
 					})
 
 
