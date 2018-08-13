@@ -14,19 +14,19 @@
 </template>
 
 <script>
-   import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
-   export default {
-      name: "Stats",
-      computed: {
-         ...mapGetters(['titlesCount', 'episodesCount']),
+export default {
+   name: 'Stats',
+   computed: {
+      ...mapGetters(['titlesCount', 'episodesCount']),
+   },
+   methods: {
+      log () {
+         console.log(this.$store.state.titles.data)
       },
-      methods: {
-         log() {
-            console.log(this.$store.state.titles.data)
-         }
-      }
-   }
+   },
+}
 </script>
 
 <style type="text/css">

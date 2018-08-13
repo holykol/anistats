@@ -9,16 +9,16 @@
             </tr>
          </thead>
          <tbody>
-            <tr v-for="(item, id) in $store.getters.sortedItems">
+            <tr v-for="(item, id) in $store.getters.sortedItems" :key="id">
                <td v-if="item.url"><a :href="item.url" target="_blank">{{item.title}}</a></td>
                <td v-else>{{item.title}}</td>
-   
+
                <td>{{ item.episodes }}</td>
                <td style="white-space: nowrap">
                   <a href="#" @click="showEditModal" :data-id="id">
                      <span class="icon icon-edit"></span> Изменить
                   </a>
-                  &nbsp &nbsp
+                  &nbsp; &nbsp;
                   <a href="#" @click="deleteItem" :data-id="id">
                      <span class="icon icon-delete"></span> Удалить
                   </a>
@@ -27,25 +27,25 @@
          </tbody>
       </table>
       <div class="card-body text-muted" v-else>Тут пока ничего нет...</div>
-      
 
-      <b-modal id="editModal" 
-         ref="editModal" 
-         title="Изменить" 
-         @ok="saveItem" 
-         ok-title="Сохранить" 
+
+      <b-modal id="editModal"
+         ref="editModal"
+         title="Изменить"
+         @ok="saveItem"
+         ok-title="Сохранить"
          cancel-title="Отмена">
 
          <form action="" ref="form">
             <div class="form-group">
                <label for="name">Название</label>
-               <input 
-                  type="text" 
-                  ref="firstInput" 
-                  v-model="editing.title" 
-                  id="title" 
-                  class="form-control" 
-                  placeholder="Название аниме" 
+               <input
+                  type="text"
+                  ref="firstInput"
+                  v-model="editing.title"
+                  id="title"
+                  class="form-control"
+                  placeholder="Название аниме"
                   required
                >
             </div>
@@ -66,59 +66,58 @@
    </div>
 </template>
 <script>
-   import smpr from '../simperium/simperium'
-   import { mapGetters } from 'vuex'
+import smpr from '../simperium/simperium'
+import { mapGetters } from 'vuex'
 
-   export default {
-      name: "Stats",
-      data() {
-         return {
-            editing: {
-               id: null,
-               title: null,
-               url: null,
-               episodes: 0,
-               createdAt: null,
-               updatedAt: null,
-            },
-            deletingId: null,
-         }
-      },
-      computed: {
-         ...mapGetters(['titlesCount'])
-      },
-      methods: {
-         deleteItem(e) {
-            e.preventDefault()
-            try {
-               const id = e.target.dataset.id
-               smpr.remove(id)
-            }
-            catch(e) {
-               // TODO
-            }
+export default {
+   name: 'Stats',
+   data () {
+      return {
+         editing: {
+            id: null,
+            title: null,
+            url: null,
+            episodes: 0,
+            createdAt: null,
+            updatedAt: null,
          },
-         showEditModal(e) {
-            e.preventDefault()
-
-            const id = e.target.dataset.id
-            const obj = this.$store.state.titles.data[id]
-
-            this.editing = Object.assign({}, obj)
-
-            this.editing.id = id
-
-            this.$refs.editModal.show()
-            this.$refs.firstInput.focus()
-         },
-         saveItem(e) {
-            e.preventDefault()
-            this.editing.updatedAt = Date.now()
-            smpr.update(this.editing.id, this.editing)
-            this.$refs.editModal.hide()
-         }
+         deletingId: null,
       }
-   }
+   },
+   computed: {
+      ...mapGetters(['titlesCount']),
+   },
+   methods: {
+      deleteItem (e) {
+         e.preventDefault()
+         try {
+            const id = e.target.dataset.id
+            smpr.remove(id)
+         } catch (e) {
+            // TODO
+         }
+      },
+      showEditModal (e) {
+         e.preventDefault()
+
+         const id = e.target.dataset.id
+         const obj = this.$store.state.titles.data[id]
+
+         this.editing = Object.assign({}, obj)
+
+         this.editing.id = id
+
+         this.$refs.editModal.show()
+         this.$refs.firstInput.focus()
+      },
+      saveItem (e) {
+         e.preventDefault()
+         this.editing.updatedAt = Date.now()
+         smpr.update(this.editing.id, this.editing)
+         this.$refs.editModal.hide()
+      },
+   },
+}
 </script>
 
 <style type="text/css">
@@ -139,7 +138,7 @@
    }
 
    .table td {
-      padding: 0.4rem 1.25rem;   
+      padding: 0.4rem 1.25rem;
    }
 
    .icon {
@@ -150,13 +149,13 @@
       font-variant: normal;
       text-transform: none;
       line-height: 1;
-   
+
       /* Better Font Rendering =========== */
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
    }
-   
-   
+
+
    .icon-delete:before {
       content: "\e900";
    }

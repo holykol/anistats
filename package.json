@@ -9,8 +9,8 @@
     "build": "poi build",
     "report": "poi build --bundle-report",
     "start": "serve dist --single",
-    "lint": "eslint . --ignore-path .gitignore",
-    "lintfix": "eslint ./src --fix --ignore-path .gitignore"
+    "lint": "eslint . --ignore-path .gitignore --ext .js,.vue",
+    "lintfix": "eslint . --fix --ignore-path .gitignore --ext .js,.vue"
   },
   "babel": {
     "presets": [
