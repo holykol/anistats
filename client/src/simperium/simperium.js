@@ -18,7 +18,7 @@ class Smpr {
 		// todo, set the user access token and have the buckets reconnect
 		this.client.setAccessToken(token)
 		this.bucket = this.client.bucket('objects')
-		this.bucket.on('index', async () => {})
+		//this.bucket.on('index', async () => {})
 	}
 
 	deauthorize() {

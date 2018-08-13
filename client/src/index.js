@@ -7,21 +7,22 @@ import App from './App.vue'
 import './simperium/simperium'
 
 import store from './store/index.js'
+import smpr from './simperium/simperium'
+
 import router from './router.js'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
 
-// let myPlugin = {
-// 	install: (Vue) => {
-// 		console.log('hello')
-// 		Vue.prototype.$simperium = new Smpr()
-// 	}
-// }
-
-
-// Vue.use(myPlugin)
+try {
+	if (store.getters.isAuthorized) {
+		smpr.setUser(store.state.account.user.access_token)
+	}
+}
+catch (e) {
+	console.error(e)
+}
 
 new Vue({
 	el: '#app',

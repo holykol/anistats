@@ -5,6 +5,8 @@ import index from './pages/index'
 import login from './pages/login'
 import register from './pages/register'
 
+import error404 from './pages/errors/404'
+
 import store from './store/index'
 
 const routes = [
@@ -32,6 +34,11 @@ const routes = [
 			requiresAuth: false,
 		},
 	},
+	{ 
+		path: '*', 
+		name: '404', 
+		component: error404, 
+ 	}
 ]
 
 const router = new VueRouter({
