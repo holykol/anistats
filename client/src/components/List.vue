@@ -29,7 +29,13 @@
       <div class="card-body text-muted" v-else>Тут пока ничего нет...</div>
       
 
-      <b-modal id="editModal" ref="editModal" title="Изменить">
+      <b-modal id="editModal" 
+         ref="editModal" 
+         title="Изменить" 
+         @ok="saveItem" 
+         ok-title="Сохранить" 
+         cancel-title="Отмена">
+
          <form action="" ref="form">
             <div class="form-group">
                <label for="name">Название</label>
@@ -56,9 +62,6 @@
                </div>
             </div>
          </form>
-   
-         <a slot="modal-cancel" @click="show=false">Отмена</a>
-         <a slot="modal-ok" variant="primary" @click="saveItem">Сохранить</a>
       </b-modal>
    </div>
 </template>
@@ -112,6 +115,7 @@
             e.preventDefault()
             this.editing.updatedAt = Date.now()
             smpr.update(this.editing.id, this.editing)
+            this.$refs.editModal.hide()
          }
       }
    }

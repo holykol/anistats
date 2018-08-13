@@ -40,17 +40,16 @@
 					this.working = true
 
 					const res = await login(this.username, this.password)
-					this.$store.commit('login', res.data)
 
+					this.$store.commit('login', res.data)
 					this.$router.push('/')
 				}
 				catch(e) {
-					this.error = (e.response.data) ? e.response.data.error : 'Страшная ошибка'
 					this.working = false
+					this.error = e.response.data || e.message
 				}
 			}
 		}
-
 	}
 </script>
 
@@ -70,5 +69,4 @@
 	.text-muted, .error {
 		font-size: 80%;
 	}
-
 </style>

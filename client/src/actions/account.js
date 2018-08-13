@@ -5,7 +5,10 @@ import smpr from '../simperium/simperium'
 export async function login(username, password) {
    const options = { 
       method: 'POST',
-      url: 'http://localhost:8081/auth/login',
+      url: `https://auth.simperium.com/1/${process.env.SIMPERIUM_APP_ID}/authorize/`,
+      headers: {
+         'X-Simperium-API-Key': process.env.SIMPERIUM_API_KEY,
+      },
       data: {
       	username,
       	password,
@@ -19,7 +22,10 @@ export async function login(username, password) {
 export async function register(username, password) {
    const options = { 
       method: 'POST',
-      url: 'http://localhost:8081/auth/register',
+      url: `https://auth.simperium.com/1/${process.env.SIMPERIUM_APP_ID}/create/`,
+      headers: {
+         'X-Simperium-API-Key': process.env.SIMPERIUM_API_KEY,
+      },
      	data: {
       	username,
       	password,

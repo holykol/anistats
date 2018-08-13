@@ -29,5 +29,6 @@ module.exports = {
    define : {
       'process.env.NODE_ENV' : `${process.env.NODE_ENV || 'development'}`,
       'process.env.SIMPERIUM_APP_ID': `${process.env.SIMPERIUM_APP_ID}`,
+      'process.env.SIMPERIUM_API_KEY': `${process.env.SIMPERIUM_API_KEY}`,
    },
 }

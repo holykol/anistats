@@ -15,6 +15,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
 
+
 try {
 	if (store.getters.isAuthorized) {
 		smpr.setUser(store.state.account.user.access_token)

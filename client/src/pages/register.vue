@@ -42,12 +42,11 @@
 					const res = await register(this.username, this.password)
 					
 					this.$store.commit('login', res.data)
-
 					this.$router.push('/')
 				}
 				catch(e) {
-					this.error = (e.response.data) ? e.response.data.error : 'Страшная ошибка'
 					this.working = false
+					this.error = e.response.data || e.message
 				}
 			}
 		}
