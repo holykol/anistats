@@ -33,7 +33,8 @@
     "request-promise-native": "^1.0.5",
     "simperium": "^0.3.2",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
     "poi": "^9.0.0",
