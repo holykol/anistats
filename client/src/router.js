@@ -44,11 +44,9 @@ router.beforeEach((to, from, next) => {
   	if (to.matched.some(record => record.meta.requiresAuth)) {
     	// this route requires auth, check if logged in
     	// if not, redirect to login page.
-    	const isLogged = store.getters.isLogged
-    	if (!isLogged) {
+    	if (!store.getters.isAuthorized) {
 	      next({
 	        	path: '/login',
-	        	query: { redirect: to.fullPath }
 	      })
 	 	}
 	 	else {

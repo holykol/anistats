@@ -4,7 +4,7 @@ const state = {
 
 // getters
 const getters = {
-   isLogged(state) {
+   isAuthorized(state) {
       if (state.user === null) {
          return false
       }
@@ -12,6 +12,7 @@ const getters = {
       return true
    },
 }
+
 // mutations
 const mutations = {
    login(state, user) {

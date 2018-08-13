@@ -1,4 +1,6 @@
 import axios from 'axios'
+import smpr from '../simperium/simperium'
+
 
 export async function login(username, password) {
    const options = { 
@@ -9,7 +11,9 @@ export async function login(username, password) {
       	password,
       },
    }
-   return await axios(options)
+   const res = await axios(options)
+   smpr.setUser(res.data.access_token)
+   return res
 }
 
 export async function register(username, password) {
@@ -22,5 +26,11 @@ export async function register(username, password) {
       },
    }
 
-   return await axios(options)
+   const res = await axios(options)
+   smpr.setUser(res.data.access_token)
+   return res
+}
+
+export async function logout() {
+   smpr.deauthorize()
 }

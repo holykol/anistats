@@ -9,7 +9,7 @@
 				<input type="password" v-model="password" class="form-control" placeholder="Пароль">
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary w-100">Войти</button>
+				<button type="submit" class="btn btn-primary w-100" :disabled="working">Войти</button>
 				<p class="text-danger error pt-2" v-if="error">{{error}}</p>
 			</div>
 			<div class="form-group">
@@ -29,19 +29,24 @@
 				username: null,
 				password: null,
 				error: null,
+				working: false,
 			}
 		},
 		methods: {
 			async submit(e) {
 				e.preventDefault()
 				try {
+					this.error = null
+					this.working = true
+
 					const res = await login(this.username, this.password)
 					this.$store.commit('login', res.data)
-					this.error = null
+
 					this.$router.push('/')
 				}
 				catch(e) {
-					this.error = e.response.data.error || 'Страшная ошибка'
+					this.error = (e.response.data) ? e.response.data.error : 'Страшная ошибка'
+					this.working = false
 				}
 			}
 		}

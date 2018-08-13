@@ -3,7 +3,7 @@
       <div class="row">
          <div class="col text-center">
             <p class="stat-text">Тайтлов:</p>
-            <div id="watched-total" class="allocated">{{ $store.state.data.length || 0}}</div>
+            <div id="watched-total" class="allocated">{{ titlesCount }}</div>
          </div>
          <div class="col text-center">
             <p class="stat-text">Эпизодов:</p>
@@ -14,11 +14,16 @@
 </template>
 
 <script>
+   import { mapGetters } from 'vuex'
+
    export default {
       name: "Stats",
       computed: {
-         episodesCount() {
-            return this.$store.getters.episodesCount || 0
+         ...mapGetters(['titlesCount', 'episodesCount']),
+      },
+      methods: {
+         log() {
+            console.log(this.$store.state.titles.data)
          }
       }
    }
@@ -33,8 +38,8 @@
       display: inline-block;
       vertical-align: top;
       font-size: 43px;
-      color: var(--blue);
-      border: 5px solid var(--blue);
+      color: var(--primary);
+      border: 5px solid var(--primary);
    }
    .stat-text{
       font-size: 22px;

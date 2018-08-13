@@ -27,7 +27,7 @@ module.exports = {
       })
    ],
    define : {
-      'process.env.NODE_ENV' : `"${process.env.NODE_ENV || 'development'}"`,
-      'process.env.SIMPERIUM_APP_ID': JSON.stringify(process.env.SIMPERIUM_APP_ID),
+      'process.env.NODE_ENV' : `${process.env.NODE_ENV || 'development'}`,
+      'process.env.SIMPERIUM_APP_ID': `${process.env.SIMPERIUM_APP_ID}`,
    },
 }

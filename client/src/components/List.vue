@@ -1,6 +1,6 @@
 <template>
    <div>
-      <table class="table table-hover mb-0" v-if="$store.state.data.length">
+      <table class="table table-hover mb-0" v-if="true">
          <thead>
             <tr>
                <th>Название</th>
@@ -9,17 +9,17 @@
             </tr>
          </thead>
          <tbody>
-            <tr v-for="item in data">
+            <tr v-for="(item, id) in $store.state.titles.data">
                <td v-if="item.url"><a :href="item.url" target="_blank">{{item.title}}</a></td>
                <td v-else>{{item.title}}</td>
    
                <td>{{ item.episodes }}</td>
                <td>
-                  <a href="#" @click="showEditModal" :data-id="item.id">
+                  <a href="#" @click="showEditModal" :data-id="id">
                      <span class="icon icon-edit"></span> Изменить
                   </a>
                   &nbsp &nbsp
-                  <a href="#" @click="deleteItem" :data-id="item.id">
+                  <a href="#" @click="deleteItem" :data-id="id">
                      <span class="icon icon-delete"></span> Удалить
                   </a>
                </td>
@@ -27,6 +27,8 @@
          </tbody>
       </table>
       <div class="card-body text-muted" v-else>Тут пока ничего нет...</div>
+      
+
       <b-modal id="editModal" ref="editModal" title="Изменить">
          <form action="" ref="form">
             <div class="form-group">
@@ -58,14 +60,11 @@
          <a slot="modal-cancel" @click="show=false">Отмена</a>
          <a slot="modal-ok" variant="primary" @click="saveItem">Сохранить</a>
       </b-modal>
-   
-      <b-modal id="deleteModal" ref="deleteModal" title="Удалить?">
-         <b-form-input type="text" />
-      </b-modal>
    </div>
 </template>
 <script>
-   
+   import smpr from '../simperium/simperium'
+
    export default {
       name: "Stats",
       data() {
@@ -82,27 +81,35 @@
       computed: {
          data() {
             return this.$store.getters.reversedItems
-         }
+         },
       },
       methods: {
          deleteItem(e) {
             e.preventDefault()
-            const id = e.target.dataset.id
-            this.$store.dispatch('deleteItem', id)
+            try {
+               const id = e.target.dataset.id
+               smpr.remove(id)
+            }
+            catch(e) {
+               // TODO
+            }
          },
          showEditModal(e) {
             e.preventDefault()
 
-            const obj = this.data.filter(function(el){
-               return el.id === e.target.dataset.id
-            })
-            this.editing = Object.assign({}, obj[0])
+            const id = e.target.dataset.id
+            const obj = this.$store.state.titles.data[id]
+
+            this.editing = Object.assign({}, obj)
+
+            this.editing.id = id
+
             this.$refs.editModal.show()
             this.$refs.firstInput.focus()
          },
          saveItem(e) {
             e.preventDefault()
-            this.$store.dispatch('updateItem', this.editing)
+            smpr.update(this.editing.id, this.editing)
          }
       }
    }
