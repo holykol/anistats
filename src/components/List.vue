@@ -16,11 +16,11 @@
                <td>{{ item.episodes }}</td>
                <td style="white-space: nowrap">
                   <a href="#" @click="showEditModal" :data-id="id">
-                     <span class="icon icon-edit"></span> Изменить
+                     <span class="icon icon-edit"/> Изменить
                   </a>
                   &nbsp; &nbsp;
                   <a href="#" @click="deleteItem" :data-id="id">
-                     <span class="icon icon-delete"></span> Удалить
+                     <span class="icon icon-delete"/> Удалить
                   </a>
                </td>
             </tr>
@@ -29,7 +29,8 @@
       <div class="card-body text-muted" v-else>Тут пока ничего нет...</div>
 
 
-      <b-modal id="editModal"
+      <b-modal
+         id="editModal"
          ref="editModal"
          title="Изменить"
          @ok="saveItem"
@@ -66,58 +67,58 @@
    </div>
 </template>
 <script>
-import smpr from '../simperium/simperium'
-import { mapGetters } from 'vuex'
+   import smpr from '../simperium/simperium'
+   import { mapGetters } from 'vuex'
 
-export default {
-   name: 'Stats',
-   data () {
-      return {
-         editing: {
-            id: null,
-            title: null,
-            url: null,
-            episodes: 0,
-            createdAt: null,
-            updatedAt: null,
-         },
-         deletingId: null,
-      }
-   },
-   computed: {
-      ...mapGetters(['titlesCount']),
-   },
-   methods: {
-      deleteItem (e) {
-         e.preventDefault()
-         try {
-            const id = e.target.dataset.id
-            smpr.remove(id)
-         } catch (e) {
-            // TODO
+   export default {
+      name: 'Stats',
+      data() {
+         return {
+            editing: {
+               id: null,
+               title: null,
+               url: null,
+               episodes: 0,
+               createdAt: null,
+               updatedAt: null,
+            },
+            deletingId: null,
          }
       },
-      showEditModal (e) {
-         e.preventDefault()
-
-         const id = e.target.dataset.id
-         const obj = this.$store.state.titles.data[id]
-
-         this.editing = Object.assign({}, obj)
-
-         this.editing.id = id
-
-         this.$refs.editModal.show()
-         this.$refs.firstInput.focus()
+      computed: {
+         ...mapGetters(['titlesCount']),
       },
-      saveItem (e) {
-         e.preventDefault()
-         this.editing.updatedAt = Date.now()
-         smpr.update(this.editing.id, this.editing)
-         this.$refs.editModal.hide()
+      methods: {
+         deleteItem(e) {
+            e.preventDefault()
+            try {
+               const id = e.target.dataset.id
+               smpr.remove(id)
+            } catch (e) {
+               // TODO
+            }
+         },
+         showEditModal(e) {
+            e.preventDefault()
+
+            const id = e.target.dataset.id
+            const obj = this.$store.state.titles.data[id]
+
+            this.editing = Object.assign({}, obj)
+
+            this.editing.id = id
+
+            this.$refs.editModal.show()
+            this.$refs.firstInput.focus()
+         },
+         saveItem(e) {
+            e.preventDefault()
+            this.editing.updatedAt = Date.now()
+            smpr.update(this.editing.id, this.editing)
+            this.$refs.editModal.hide()
+         },
       },
-   },
-}
+   }
 </script>
 
 <style type="text/css">

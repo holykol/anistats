@@ -20,37 +20,37 @@
 </template>
 
 <script>
-import { register } from '../actions/account'
+   import { register } from '../actions/account'
 
-export default {
-   name: 'Register',
-   data () {
-      return {
-         username: null,
-         password: null,
-         error: null,
-         working: false,
-      }
-   },
-   methods: {
-      async submit (e) {
-         e.preventDefault()
-         try {
-            this.error = null
-            this.working = true
-
-            const res = await register(this.username, this.password)
-
-            this.$store.commit('login', res.data)
-            this.$router.push('/')
-         } catch (e) {
-            this.working = false
-            this.error = e.response.data || e.message
+   export default {
+      name: 'Register',
+      data() {
+         return {
+            username: null,
+            password: null,
+            error: null,
+            working: false,
          }
       },
-   },
+      methods: {
+         async submit(e) {
+            e.preventDefault()
+            try {
+               this.error = null
+               this.working = true
 
-}
+               const res = await register(this.username, this.password)
+
+               this.$store.commit('login', res.data)
+               this.$router.push('/')
+            } catch (e) {
+               this.working = false
+               this.error = e.response.data || e.message
+            }
+         },
+      },
+
+   }
 </script>
 
 <style type="text/css" scoped>

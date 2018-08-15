@@ -5,7 +5,7 @@
             <div class="card">
                <div class="card-header">Добавить тайтл</div>
                <div class="card-body">
-                  <Add></Add>
+                  <Add/>
                </div>
             </div>
          </div>
@@ -13,7 +13,7 @@
             <div class="card">
                <div class="card-header">Всего просмотрено</div>
                <div class="card-body">
-                  <Stats></Stats>
+                  <Stats/>
                </div>
             </div>
          </div>
@@ -22,7 +22,7 @@
          <div class="col col-custom">
             <div class="card">
                <div class="card-header">Последние просмотренные</div>
-               <List></List>
+               <List/>
             </div>
          </div>
       </div>
@@ -30,20 +30,20 @@
 </template>
 
 <script>
-import 'bootstrap/dist/css/bootstrap.css'
+   import 'bootstrap/dist/css/bootstrap.css'
 
-import Add from '../components/Add.vue'
-import Stats from '../components/Stats.vue'
-import List from '../components/List.vue'
+   import Add from '../components/Add.vue'
+   import Stats from '../components/Stats.vue'
+   import List from '../components/List.vue'
 
-export default {
-   name: 'Index',
-   components: {
-      'Add': Add,
-      'Stats': Stats,
-      'List': List,
-   },
-}
+   export default {
+      name: 'Index',
+      components: {
+         'Add': Add,
+         'Stats': Stats,
+         'List': List,
+      },
+   }
 
 
 </script>

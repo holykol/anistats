@@ -24,52 +24,52 @@
 </template>
 
 <script>
-import smpr from '../simperium/simperium'
+   import smpr from '../simperium/simperium'
 
-export default {
-   name: 'Add',
-   data () {
-      return {
-         title: null,
-         url: null,
-         episodes: null,
-         error: null,
-         createdAt: null,
-         updatedAt: null,
-      }
-   },
-   methods: {
-      async submit (e) {
-         e.preventDefault()
-
-         try {
-            if (!this.title || this.episodes < 1) {
-               this.error = 'Заполни все поля!'
-               setTimeout(() => {
-                  this.error = null
-               }, 2000)
-               return
-            }
-
-            await smpr.add({
-               title: this.title,
-               url: this.url,
-               episodes: this.episodes,
-               createdAt: Date.now(),
-               updatedAt: Date.now(),
-            })
-
-
-            this.title = null
-            this.url = null
-            this.episodes = null
-            this.error = null
-         } catch (e) {
-            this.error = e.message
+   export default {
+      name: 'Add',
+      data() {
+         return {
+            title: null,
+            url: null,
+            episodes: null,
+            error: null,
+            createdAt: null,
+            updatedAt: null,
          }
       },
-   },
-}
+      methods: {
+         async submit(e) {
+            e.preventDefault()
+
+            try {
+               if (!this.title || this.episodes < 1) {
+                  this.error = 'Заполни все поля!'
+                  setTimeout(() => {
+                     this.error = null
+                  }, 2000)
+                  return
+               }
+
+               await smpr.add({
+                  title: this.title,
+                  url: this.url,
+                  episodes: this.episodes,
+                  createdAt: Date.now(),
+                  updatedAt: Date.now(),
+               })
+
+
+               this.title = null
+               this.url = null
+               this.episodes = null
+               this.error = null
+            } catch (e) {
+               this.error = e.message
+            }
+         },
+      },
+   }
 </script>
 
 <style scoped>

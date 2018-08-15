@@ -20,36 +20,36 @@
 </template>
 
 <script>
-import { login } from '../actions/account'
+   import { login } from '../actions/account'
 
-export default {
-   name: 'Login',
-   data () {
-      return {
-         username: null,
-         password: null,
-         error: null,
-         working: false,
-      }
-   },
-   methods: {
-      async submit (e) {
-         e.preventDefault()
-         try {
-            this.error = null
-            this.working = true
-
-            const res = await login(this.username, this.password)
-
-            this.$store.commit('login', res.data)
-            this.$router.push('/')
-         } catch (e) {
-            this.working = false
-            this.error = e.response.data || e.message
+   export default {
+      name: 'Login',
+      data() {
+         return {
+            username: null,
+            password: null,
+            error: null,
+            working: false,
          }
       },
-   },
-}
+      methods: {
+         async submit(e) {
+            e.preventDefault()
+            try {
+               this.error = null
+               this.working = true
+
+               const res = await login(this.username, this.password)
+
+               this.$store.commit('login', res.data)
+               this.$router.push('/')
+            } catch (e) {
+               this.working = false
+               this.error = e.response.data || e.message
+            }
+         },
+      },
+   }
 </script>
 
 <style type="text/css" scoped>

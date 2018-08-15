@@ -1,16 +1,16 @@
 import store from '../store/index'
 
-export default function () {
+export default function() {
    return new CustomBucketStore()
 }
 
 class CustomBucketStore {
-   get (id, callback) {
+   get(id, callback) {
       // console.log('Storage get')
       callback(store.state.titles[id])
    }
 
-   update (id, object, isIndexing, callback) {
+   update(id, object, isIndexing, callback) {
       // console.log('Storage update')
       store.commit('updateItem', {
          id,
@@ -23,14 +23,14 @@ class CustomBucketStore {
       })
    }
 
-   remove (id, callback) {
+   remove(id, callback) {
       // console.log('Storage remove')
       store.commit('removeItem', id)
       callback(null)
    }
 
    // TODO: build a query interface
-   find (query, callback) {
+   find(query, callback) {
       // console.log('Storage find')
       var objects = []
       var key

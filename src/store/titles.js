@@ -5,7 +5,7 @@ const state = {
 }
 
 const mutations = {
-   updateItem (state, {id, data}) {
+   updateItem(state, {id, data}) {
       // console.log('Storage update')
 
       // Set state property to make it reactive
@@ -13,37 +13,37 @@ const mutations = {
       Vue.set(state.data, id, data)
    },
 
-   removeItem (state, id) {
+   removeItem(state, id) {
       // console.log('Storage remove')
       Vue.delete(state.data, id)
    },
 
-   clearItems (state) {
+   clearItems(state) {
       state.data = {}
    },
 }
 
 const actions = {
-   logout ({ commit }) {
+   logout({ commit }) {
       commit('clearItems')
       commit('logout')
    },
 }
 
 const getters = {
-   episodesCount (state) {
+   episodesCount(state) {
       let count = 0
       for (let key in state.data) {
          count += Number(state.data[key].episodes)
       }
       return count
    },
-   titlesCount (state) {
+   titlesCount(state) {
       const keys = Object.keys(state.data)
       return keys.length
    },
 
-   sortedItems (state) {
+   sortedItems(state) {
       const sorted = Object.keys(state.data).sort((id1, id2) => {
          const a = state.data[id1].createdAt
          const b = state.data[id2].createdAt

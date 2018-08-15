@@ -1,23 +1,23 @@
-export default function (bucket) {
+export default function(bucket) {
    return new Store(bucket)
 };
 
 export class Store {
-   constructor (bucket) {
+   constructor(bucket) {
       // console.log('init')
 
       this.bucket = bucket
       this.index = {}
    }
 
-   getChangeVersion () {
+   getChangeVersion() {
       return new Promise((resolve) => {
          // console.log('action gcv')
          resolve(this.cv)
       })
    }
 
-   setChangeVersion (cv) {
+   setChangeVersion(cv) {
       return new Promise((resolve) => {
          // console.log('action scv')
          this.cv = cv
@@ -25,7 +25,7 @@ export class Store {
       })
    }
 
-   put (id, version, data) {
+   put(id, version, data) {
       return new Promise((resolve) => {
          // console.log('action put')
          this.index[id] = JSON.stringify({version: version, data: data})
@@ -33,7 +33,7 @@ export class Store {
       })
    }
 
-   get (id) {
+   get(id) {
       return new Promise((resolve) => {
          // console.log('action get')
          var ghost = this.index[id]
@@ -48,7 +48,7 @@ export class Store {
       })
    }
 
-   remove (id) {
+   remove(id) {
       return new Promise((resolve) => {
          // console.log('action remove')
          delete this.index[id]
