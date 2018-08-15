@@ -3,7 +3,7 @@
       <div class="row">
          <div class="col col-12 col-md-6 col-custom">
             <div class="card">
-               <div class="card-header">Добавить тайтл</div>
+               <div class="card-header">Add title</div>
                <div class="card-body">
                   <Add/>
                </div>
@@ -11,7 +11,7 @@
          </div>
          <div class="col col-12 col-md-6 col-custom">
             <div class="card">
-               <div class="card-header">Всего просмотрено</div>
+               <div class="card-header">Stats</div>
                <div class="card-body">
                   <Stats/>
                </div>
@@ -21,7 +21,7 @@
       <div class="row">
          <div class="col col-custom">
             <div class="card">
-               <div class="card-header">Последние просмотренные</div>
+               <div class="card-header">Last viewed</div>
                <List/>
             </div>
          </div>

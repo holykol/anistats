@@ -1,5 +1,5 @@
 <template>
-   <h1 class="mt-4">404. Страница не найдена(</h1>
+   <h1 class="mt-4">404. Not found</h1>
 </template>
 
 <script>

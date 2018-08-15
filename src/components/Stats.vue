@@ -2,11 +2,11 @@
    <div>
       <div class="row">
          <div class="col text-center">
-            <p class="stat-text">Тайтлов:</p>
+            <p class="stat-text">Titles:</p>
             <div id="watched-total" class="allocated">{{ titlesCount }}</div>
          </div>
          <div class="col text-center">
-            <p class="stat-text">Эпизодов:</p>
+            <p class="stat-text">Episodes:</p>
             <div id="watched-episodes" class="allocated">{{ episodesCount }}</div>
          </div>
       </div>

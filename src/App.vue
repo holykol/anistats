@@ -8,7 +8,7 @@
                <img :src="avatarUrl" class="avatar mr-1" alt="avatar">
                <span>{{$store.state.account.user.username}}</span>
             </span>
-            <b-dropdown-item @click="logout">Выйти</b-dropdown-item>
+            <b-dropdown-item @click="logout">Logout</b-dropdown-item>
          </b-nav-item-dropdown>
 
 

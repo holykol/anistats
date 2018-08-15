@@ -3,9 +3,9 @@
       <table class="table table-hover mb-0" v-if="titlesCount">
          <thead>
             <tr>
-               <th>Название</th>
-               <th>Эпизоды</th>
-               <th>Действия</th>
+               <th>Title</th>
+               <th>Episodes</th>
+               <th>Actions</th>
             </tr>
          </thead>
          <tbody>
@@ -16,17 +16,17 @@
                <td>{{ item.episodes }}</td>
                <td style="white-space: nowrap">
                   <a href="#" @click="showEditModal" :data-id="id">
-                     <span class="icon icon-edit"/> Изменить
+                     <span class="icon icon-edit"/> Edit
                   </a>
                   &nbsp; &nbsp;
                   <a href="#" @click="deleteItem" :data-id="id">
-                     <span class="icon icon-delete"/> Удалить
+                     <span class="icon icon-delete"/> Delete
                   </a>
                </td>
             </tr>
          </tbody>
       </table>
-      <div class="card-body text-muted" v-else>Тут пока ничего нет...</div>
+      <div class="card-body text-muted" v-else>There is nothing here...</div>
 
 
       <b-modal
@@ -39,25 +39,25 @@
 
          <form action="" ref="form">
             <div class="form-group">
-               <label for="name">Название</label>
+               <label for="name">Title</label>
                <input
                   type="text"
                   ref="firstInput"
                   v-model="editing.title"
                   id="title"
                   class="form-control"
-                  placeholder="Название аниме"
+                  placeholder="Death Note"
                   required
                >
             </div>
             <div class="form-group">
                <div class="row">
                   <div class="col-8">
-                     <label for="url">Ссылка</label>
+                     <label for="url">URL</label>
                      <input type="text" v-model="editing.url" class="form-control" placeholder="https://example.com">
                   </div>
                   <div class="col-4">
-                     <label for="episodes">Эпизоды</label>
+                     <label for="episodes">Episodes</label>
                      <input type="number" v-model="editing.episodes"  class="form-control" min="1" step="1" placeholder="20" required>
                   </div>
                </div>

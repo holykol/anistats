@@ -1,24 +1,27 @@
 <template>
    <form action="">
       <div class="form-group">
-         <label for="name">Название</label>
-         <input type="text" v-model="title" id="title" class="form-control" placeholder="Название аниме" required>
+         <label for="name">Title</label>
+         <b-form-input type="text" v-model="obj.title" id="title" :state="error_title" class="form-control" placeholder="Death Note"/>
+         <b-form-invalid-feedback>
+           This is a required field
+         </b-form-invalid-feedback>
       </div>
       <div class="form-group">
          <div class="row">
             <div class="col-8">
-               <label for="url">Ссылка</label>
-               <input type="text" v-model="url" id="url" class="form-control" placeholder="https://example.com">
+               <label for="url">URL</label>
+               <b-form-input type="text" v-model="obj.url" id="url" placeholder="https://example.com"/>
             </div>
             <div class="col-4">
-               <label for="episodes">Эпизоды</label>
-               <input type="number" v-model="episodes" id="episodes" class="form-control" min="1" step="1" placeholder="20" required>
+               <label for="episodes">Episodes</label>
+               <b-form-input type="number" v-model="obj.episodes" id="episodes" :state="this.error_episodes" min="0" class="form-control" placeholder="20"/>
             </div>
          </div>
       </div>
       <div class="form-group m-0">
-         <button id="submit" class="btn btn-primary mt-1 w-100" @click="submit">Добавить</button>
-         <p v-if="error" class="text-danger error m-0 mt-2">{{ error }}</p>
+         <button id="submit" class="btn btn-primary mt-1 w-100" @click="submit">Add</button>
+         <p v-if="error_submit" class="text-danger error m-0 mt-2">{{ error_submit }}</p>
       </div>
    </form>
 </template>
@@ -30,42 +33,70 @@
       name: 'Add',
       data() {
          return {
-            title: null,
-            url: null,
-            episodes: null,
-            error: null,
-            createdAt: null,
-            updatedAt: null,
+            count: 0,
+            error_title: null,
+            error_episodes: null,
+            error_submit: null,
+            obj: {
+               title: '',
+               url: '',
+               episodes: 0,
+            },
          }
+      },
+      watch: {
+         'obj.title': function(value) {
+            if (value.length > 0) {
+               this.error_title = null
+            }
+         },
+
+         'obj.episodes': function(value) {
+            if (Number(value) > 0) {
+               this.error_episodes = null
+            }
+         },
       },
       methods: {
          async submit(e) {
             e.preventDefault()
-
             try {
-               if (!this.title || this.episodes < 1) {
-                  this.error = 'Заполни все поля!'
-                  setTimeout(() => {
-                     this.error = null
-                  }, 2000)
+               console.log('Submit')
+               if(!this.obj.title.length > 0) {
+                  this.error_title = false
+               }
+
+               if(Number(this.obj.episodes) < 1) {
+                  this.error_episodes = false
+               }
+
+
+               if (this.error_title === false || this.error_episodes === false) {
                   return
                }
 
                await smpr.add({
-                  title: this.title,
-                  url: this.url,
-                  episodes: this.episodes,
+                  title: this.obj.title,
+                  url: this.obj.url,
+                  episodes: Number(this.obj.episodes),
                   createdAt: Date.now(),
                   updatedAt: Date.now(),
                })
 
 
-               this.title = null
-               this.url = null
-               this.episodes = null
-               this.error = null
+               this.obj = {
+                  title: '',
+                  url: '',
+                  episodes: 0,
+               }
+
+               this.error_title = null
+               this.error_episodes = null
+               this.error_submit = null
+
             } catch (e) {
-               this.error = e.message
+               console.error(e)
+               this.error_submit = e.message
             }
          },
       },

@@ -1,19 +1,19 @@
 <template>
    <div class="wrap">
       <form action="" class="form" @submit="submit">
-         <h3 class="pb-3">Вход / <router-link to="/register">Регистрация</router-link></h3>
+         <h3 class="pb-3">Login / <router-link to="/register">Join</router-link></h3>
          <div class="form-group">
             <input type="email" v-model="username" class="form-control" placeholder="Email">
          </div>
          <div class="form-group">
-            <input type="password" v-model="password" class="form-control" placeholder="Пароль">
+            <input type="password" v-model="password" class="form-control" placeholder="Password">
          </div>
          <div class="form-group">
-            <button type="submit" class="btn btn-primary w-100" :disabled="working">Войти</button>
+            <button type="submit" class="btn btn-primary w-100" :disabled="working">Login</button>
             <p class="text-danger error pt-2" v-if="error">{{error}}</p>
          </div>
          <div class="form-group">
-            <p class="text-muted">Твои данные обрабатываются <a href="https://simperium.com">Simperium</a></p>
+            <p class="text-muted">Your data is being processed by <a href="https://simperium.com">Simperium</a></p>
          </div>
       </form>
    </div>
