@@ -9,6 +9,6 @@
       name: 'Join',
       components: {
          Form,
-      }
+      },
    }
 </script>

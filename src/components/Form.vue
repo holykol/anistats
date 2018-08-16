@@ -11,7 +11,7 @@
          </div>
          <div class="form-group">
             <b-form-input type="password" v-model="password" class="form-control" placeholder="Password" :state="($v.password.$error) ? false : null"/>
-            <div class="invalid-feedback" v-if="!$v.password.required">This field is required</div>            
+            <div class="invalid-feedback" v-if="!$v.password.required">This field is required</div>
          </div>
          <div class="form-group">
             <button type="submit" class="btn btn-primary w-100" :disabled="working">{{(isLogin) ? 'Login' : 'Create account'}}</button>
@@ -47,12 +47,12 @@
          },
          password: {
             required,
-         }
+         },
       },
       methods: {
          async submit(e) {
             try {
-            	this.error = null
+               this.error = null
                this.$v.$touch()
 
                if (this.$v.$invalid) {
@@ -64,12 +64,12 @@
                let res
 
                if (this.isLogin) {
-            		res = await login(this.username, this.password)
+                  res = await login(this.username, this.password)
                }
                else {
-               	res = await register(this.username, this.password)
+                  res = await register(this.username, this.password)
                }
-               
+
                this.$store.commit('login', res.data)
                this.$router.push('/')
 

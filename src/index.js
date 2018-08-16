@@ -20,12 +20,12 @@ Vue.use(FormInput)
 Vue.use(Vuelidate)
 
 if (store.getters.isAuthorized) {
-	try {
+   try {
 	   smpr.setUser(store.state.account.user.access_token)
-	} 
-	catch (e) {
+   }
+   catch (e) {
 	   console.error(e)
-	}
+   }
 }
 
 new Vue({ // eslint-disable-line no-new

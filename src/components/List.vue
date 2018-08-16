@@ -40,7 +40,7 @@
          <form action="" ref="form">
             <div class="form-group">
                <label for="name">Title</label>
-               <b-form-input 
+               <b-form-input
                   type="text"
                   v-model="editing.title"
                   :state="($v.editing.title.$error) ? false : null"
@@ -54,11 +54,11 @@
                <div class="row">
                   <div class="col-8">
                      <label for="url">URL</label>
-                     <b-form-input 
-                        type="text" 
-                        v-model="editing.url" 
-                        :state="($v.editing.episodes.$error) ? false : null" 
-                        id="url" 
+                     <b-form-input
+                        type="text"
+                        v-model="editing.url"
+                        :state="($v.editing.episodes.$error) ? false : null"
+                        id="url"
                         placeholder="https://example.com"/>
                      <div class="invalid-feedback" v-if="!$v.editing.episodes.url">Url must start with http(s)</div>
 
@@ -112,13 +112,13 @@
 
             episodes: {
                required,
-               minValue: minValue(1)
+               minValue: minValue(1),
             },
             url: {
                url,
             },
-         }
-         
+         },
+
       },
       methods: {
          deleteItem(id) {
@@ -141,13 +141,13 @@
          saveItem(e) {
             try {
                this.$v.$touch()
-               
+
                if (this.$v.$invalid) {
                   return
                }
 
                this.editing.updatedAt = Date.now()
-               
+
                const id = this.editing.id
 
                smpr.update(id, this.editing)

@@ -2,7 +2,7 @@
    <form action="">
       <div class="form-group">
          <label for="name">Title</label>
-         <b-form-input 
+         <b-form-input
             type="text"
             v-model="title"
             :state="($v.title.$error) ? false : null"
@@ -16,11 +16,11 @@
          <div class="row">
             <div class="col-8">
                <label for="url">URL</label>
-               <b-form-input 
-                  type="text" 
-                  v-model="url" 
-                  :state="($v.url.$error) ? false : null" 
-                  id="url" 
+               <b-form-input
+                  type="text"
+                  v-model="url"
+                  :state="($v.url.$error) ? false : null"
+                  id="url"
                   placeholder="https://example.com"/>
                <div class="invalid-feedback" v-if="!$v.url.url">Url must start with http(s)</div>
 
@@ -49,12 +49,12 @@
 <script>
    import smpr from '../simperium/simperium'
    import { required, minLength, minValue, url } from 'vuelidate/lib/validators'
-   import { validationMixin } from "vuelidate"
+   import { validationMixin } from 'vuelidate'
 
    export default {
       name: 'Add',
       data() {
-         return {            
+         return {
             title: null,
             url: null,
             episodes: null,
@@ -79,7 +79,7 @@
          async submit(e) {
             try {
                this.$v.$touch()
-               
+
                if (this.$v.$invalid) {
                   return
                }
@@ -99,7 +99,7 @@
 
                this.$v.$reset()
 
-            } 
+            }
             catch (e) {
                console.error(e)
                this.error_submit = e.message
