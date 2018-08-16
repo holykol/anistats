@@ -15,11 +15,11 @@
 
                <td>{{ item.episodes }}</td>
                <td style="white-space: nowrap">
-                  <a href="#" @click.prevent="showEditModal" :data-id="id">
+                  <a href="#" @click.prevent="showEditModal(id)" :data-id="id">
                      <span class="icon icon-edit"/> Edit
                   </a>
                   &nbsp; &nbsp;
-                  <a href="#" @click.prevent="deleteItem" :data-id="id">
+                  <a href="#" @click.prevent="deleteItem(id)" :data-id="id">
                      <span class="icon icon-delete"/> Delete
                   </a>
                </td>
@@ -121,16 +121,14 @@
          
       },
       methods: {
-         deleteItem(e) {
+         deleteItem(id) {
             try {
-               const id = e.target.dataset.id
                smpr.remove(id)
             } catch (e) {
                console.log(e)
             }
          },
-         showEditModal(e) {
-            const id = e.target.dataset.id
+         showEditModal(id) {
             const obj = this.$store.state.titles.data[id]
 
             this.editing = Object.assign({}, obj)
