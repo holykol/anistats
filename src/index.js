@@ -1,7 +1,8 @@
 import Vue from 'vue'
 
-import BootstrapVue from 'bootstrap-vue'
 import Vuelidate from 'vuelidate'
+
+import { Card, Dropdown, Modal, Nav, FormInput } from 'bootstrap-vue/es/components'
 
 import App from './App.vue'
 
@@ -10,7 +11,12 @@ import smpr from './simperium/simperium'
 
 import router from './router.js'
 
-Vue.use(BootstrapVue)
+Vue.use(Card)
+Vue.use(Dropdown)
+Vue.use(Modal)
+Vue.use(Nav)
+Vue.use(FormInput)
+
 Vue.use(Vuelidate)
 
 if (store.getters.isAuthorized) {
