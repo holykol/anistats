@@ -19,7 +19,7 @@
 
 First, create a new Simperium application [here](https://simperium.com/app/new/)
 
-Then click the button above and enter your `SIMPERIUM_APP_ID` and `SIMPERIUM_API_KEY` with default permissions. 
+Then click on the button above and enter your `SIMPERIUM_APP_ID` and `SIMPERIUM_API_KEY` with default permissions. 
 
 
 
