@@ -2,8 +2,6 @@
 
 > Simply keep a track of the watched anime. A good alternative for excel spreadsheet
 
-[![Deploy to now](https://deploy.now.sh/static/button.svg)](https://deploy.now.sh/?repo=https://github.com/holykol/anistats&env=SIMPERIUM_APP_ID&env=SIMPERIUM_API_KEY)
-
 
 
 ## Features
@@ -12,6 +10,17 @@
 * A bit trite but modern design
 * Simple as hell
 * It's just works
+
+
+
+## Deployment
+
+[![Deploy to now](https://deploy.now.sh/static/button.svg)](https://deploy.now.sh/?repo=https://github.com/holykol/anistats&env=SIMPERIUM_APP_ID&env=SIMPERIUM_API_KEY)
+
+First, create a new Simperium application [here](https://simperium.com/app/new/)
+
+Then click the button above and enter your `SIMPERIUM_APP_ID` and `SIMPERIUM_API_KEY` with default permissions. 
+
 
 
 
