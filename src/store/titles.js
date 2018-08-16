@@ -1,36 +1,10 @@
 import Vue from 'vue'
 
-const state = {
+export const state = {
    data: {},
 }
 
-const mutations = {
-   updateItem(state, {id, data}) {
-      // console.log('Storage update')
-
-      // Set state property to make it reactive
-      // https://vuejs.org/v2/api/#Vue-set
-      Vue.set(state.data, id, data)
-   },
-
-   removeItem(state, id) {
-      // console.log('Storage remove')
-      Vue.delete(state.data, id)
-   },
-
-   clearItems(state) {
-      state.data = {}
-   },
-}
-
-const actions = {
-   logout({ commit }) {
-      commit('clearItems')
-      commit('logout')
-   },
-}
-
-const getters = {
+export const getters = {
    episodesCount(state) {
       let count = 0
       for (let key in state.data) {
@@ -59,6 +33,33 @@ const getters = {
       return result
    },
 }
+
+export const mutations = {
+   updateItem(state, {id, data}) {
+      // console.log('Storage update')
+
+      // Set state property to make it reactive
+      // https://vuejs.org/v2/api/#Vue-set
+      Vue.set(state.data, id, data)
+   },
+
+   removeItem(state, id) {
+      // console.log('Storage remove')
+      Vue.delete(state.data, id)
+   },
+
+   clearItems(state) {
+      state.data = {}
+   },
+}
+
+export const actions = {
+   logout({ commit }) {
+      commit('clearItems')
+      commit('logout')
+   },
+}
+
 
 export default {
    actions,
