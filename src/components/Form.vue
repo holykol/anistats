@@ -75,7 +75,7 @@
 
             } catch (e) {
                this.working = false
-               this.error = (e.response.data) ? e.response.data.error : e.message
+               this.error = (e.response.data) ? e.response.data : e.message
             }
          },
       },
