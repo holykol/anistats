@@ -15,11 +15,11 @@
 
                <td>{{ item.episodes }}</td>
                <td style="white-space: nowrap">
-                  <a href="#" @click="showEditModal" :data-id="id">
+                  <a href="#" @click.prevent="showEditModal" :data-id="id">
                      <span class="icon icon-edit"/> Edit
                   </a>
                   &nbsp; &nbsp;
-                  <a href="#" @click="deleteItem" :data-id="id">
+                  <a href="#" @click.prevent="deleteItem" :data-id="id">
                      <span class="icon icon-delete"/> Delete
                   </a>
                </td>
@@ -32,33 +32,48 @@
       <b-modal
          id="editModal"
          ref="editModal"
-         title="Изменить"
-         @ok="saveItem"
-         ok-title="Сохранить"
-         cancel-title="Отмена">
+         title="Edit"
+         @ok.prevent="saveItem"
+         ok-title="Save"
+         cancel-title="Cancel">
 
          <form action="" ref="form">
             <div class="form-group">
                <label for="name">Title</label>
-               <input
+               <b-form-input 
                   type="text"
-                  ref="firstInput"
                   v-model="editing.title"
+                  :state="($v.editing.title.$error) ? false : null"
                   id="title"
                   class="form-control"
-                  placeholder="Death Note"
-                  required
-               >
+                  placeholder="Death Note" />
+               <div class="invalid-feedback" v-if="!$v.editing.title.required">This field is required</div>
+
             </div>
             <div class="form-group">
                <div class="row">
                   <div class="col-8">
                      <label for="url">URL</label>
-                     <input type="text" v-model="editing.url" class="form-control" placeholder="https://example.com">
+                     <b-form-input 
+                        type="text" 
+                        v-model="editing.url" 
+                        :state="($v.editing.episodes.$error) ? false : null" 
+                        id="url" 
+                        placeholder="https://example.com"/>
+                     <div class="invalid-feedback" v-if="!$v.editing.episodes.url">Url must start with http(s)</div>
+
                   </div>
                   <div class="col-4">
                      <label for="episodes">Episodes</label>
-                     <input type="number" v-model="editing.episodes"  class="form-control" min="1" step="1" placeholder="20" required>
+                     <b-form-input
+                        type="number"
+                        v-model.number="editing.episodes"
+                        :state="($v.editing.url.$error) ? false : null"
+                        id="episodes"
+                        min="1"
+                        class="form-control"
+                        placeholder="20"/>
+                     <div class="invalid-feedback" v-if="!$v.editing.url.required">Must be greater that 0</div>
                   </div>
                </div>
             </div>
@@ -66,41 +81,55 @@
       </b-modal>
    </div>
 </template>
+
 <script>
    import smpr from '../simperium/simperium'
+   import { required, numeric, minLength, minValue, url } from 'vuelidate/lib/validators'
    import { mapGetters } from 'vuex'
 
    export default {
-      name: 'Stats',
+      name: 'List',
       data() {
          return {
             editing: {
                id: null,
                title: null,
                url: null,
-               episodes: 0,
+               episodes: null,
                createdAt: null,
                updatedAt: null,
             },
-            deletingId: null,
          }
       },
       computed: {
          ...mapGetters(['titlesCount']),
       },
+      validations: {
+         editing: {
+            title: {
+               required,
+            },
+
+            episodes: {
+               required,
+               minValue: minValue(1)
+            },
+            url: {
+               url,
+            },
+         }
+         
+      },
       methods: {
          deleteItem(e) {
-            e.preventDefault()
             try {
                const id = e.target.dataset.id
                smpr.remove(id)
             } catch (e) {
-               // TODO
+               console.log(e)
             }
          },
          showEditModal(e) {
-            e.preventDefault()
-
             const id = e.target.dataset.id
             const obj = this.$store.state.titles.data[id]
 
@@ -108,14 +137,27 @@
 
             this.editing.id = id
 
+            this.$v.$reset()
             this.$refs.editModal.show()
-            this.$refs.firstInput.focus()
          },
          saveItem(e) {
-            e.preventDefault()
-            this.editing.updatedAt = Date.now()
-            smpr.update(this.editing.id, this.editing)
-            this.$refs.editModal.hide()
+            try {
+               this.$v.$touch()
+               
+               if (this.$v.$invalid) {
+                  return
+               }
+
+               this.editing.updatedAt = Date.now()
+               
+               const id = this.editing.id
+
+               smpr.update(id, this.editing)
+               this.$refs.editModal.hide()
+            }
+            catch(e) {
+               console.error(e)
+            }
          },
       },
    }

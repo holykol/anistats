@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 
 import index from './pages/index'
 import login from './pages/login'
-import register from './pages/register'
+import join from './pages/join'
 
 import error404 from './pages/errors/404'
 
@@ -31,9 +31,9 @@ const routes = [
       },
    },
    {
-      path: '/register',
-      name: 'register',
-      component: register,
+      path: '/join',
+      name: 'join',
+      component: join,
       meta: {
          requiresAuth: false,
       },

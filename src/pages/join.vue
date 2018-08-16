@@ -1,5 +1,5 @@
 <template>
-   <Form :isLogin="true"/>
+   <Form :isLogin="false"/>
 </template>
 
 <script>
