@@ -34,4 +34,4 @@ Then click on the button above and enter your `SIMPERIUM_APP_ID` and `SIMPERIUM_
 
 ### License
 
-Released under [WTFPL](http://www.wtfpl.net/)
+Released under MIT
