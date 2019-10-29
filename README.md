@@ -2,7 +2,10 @@
 
 > Simply keep a track of the watched anime. A good alternative for excel spreadsheet
 
+**DEPRECATED:** Simperium has closed the registration of new accounts and no longer offers free synchronization plans.
 
+![screenshot](./screenshot.png)
+<center>Here's how it looked like.</center>
 
 ## Features
 
@@ -19,7 +22,7 @@
 
 First, create a new Simperium application [here](https://simperium.com/app/new/)
 
-Then click on the button above and enter your `SIMPERIUM_APP_ID` and `SIMPERIUM_API_KEY` with default permissions. 
+Then click on the button above and enter your `SIMPERIUM_APP_ID` and `SIMPERIUM_API_KEY` with default permissions.
 
 
 
